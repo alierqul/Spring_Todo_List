@@ -9,8 +9,8 @@ export const login = creds => {
    return axios.post('/api/1.0/auth', { },{auth: creds });
  };
 
- export const getMyTodoList = (username)=> {
-  const path = username && `/api/1.0/users/${username}/todo`;
+ export const getMyTodoList = (username,page=0,size=3)=> {
+  const path = username && `/api/1.0/todo/${username}?page=${page}&size=${size}`;
   return axios.get(path);
  };
 

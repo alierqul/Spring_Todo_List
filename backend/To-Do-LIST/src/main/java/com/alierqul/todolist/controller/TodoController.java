@@ -28,14 +28,15 @@ public class TodoController {
   @Autowired
   TodoService service;
 
-  @PostMapping("/todo")
-  GenericResponse saveTodo(@Valid @RequestBody Todo todo, @CurrentUser UserEntity user) {
-    service.save(todo, user);
-      return new GenericResponse("Hoax is saved");
+  @PostMapping("/todo/{username}")
+  GenericResponse saveTodo( @PathVariable("username") String username,@Valid @RequestBody Todo todo) {
+
+    service.save(todo, username);
+      return new GenericResponse(username+"Todo is saved");
   }
   
-  @GetMapping("/users/{username}/todo") 
-  Page<Todo> getUserTodo(@PathVariable String username, @PageableDefault(sort = "startDate", direction = Direction.DESC) Pageable page){
+  @GetMapping("/todo/{username}")
+  Page<Todo> getUserTodo(@PathVariable("username") String username, @PageableDefault(sort = "id", direction = Direction.DESC) Pageable page){
       return service.getTodoOfUser(username, page).map(Todo::new);
   }
 

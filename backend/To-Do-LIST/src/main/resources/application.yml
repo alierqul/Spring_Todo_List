@@ -3,9 +3,7 @@ spring:
     generate-unique-name: false
     url: jdbc:h2:./devdb
     username: sa
-  h2:
-    console:
-      enabled: true
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,4 +17,3 @@ spring:
         pageable:
            page-parameter: page
            size-parameter: size
-           

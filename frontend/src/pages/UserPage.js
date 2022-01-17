@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileCard from '../components/ProfileCard';
-import TodoList from '../components/TodoList';
+import TodoList from '../todo/TodoList';
 
 const UserPage = props => {
     return (

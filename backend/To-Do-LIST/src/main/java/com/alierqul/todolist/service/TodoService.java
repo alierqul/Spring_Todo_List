@@ -49,7 +49,8 @@ public class TodoService implements IServiceCrudProgress<TodoEntity> {
     todoRepository.deleteById(id);
   }
 
-  public void save(Todo todo, UserEntity user) {
+  public void save(Todo todo, String username) {
+    UserEntity user=userService.findByUsername(username);
     TodoEntity entity = new TodoEntity();
     entity.setTodo(todo.getTodo());
     entity.setUser(user);
