@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    generate-unique-name: false
+    url: jdbc:h2:./devdb
+    username: sa
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+  data:
+     web:
+        pageable:
+           page-parameter: page
+           size-parameter: size
+           
