@@ -33,7 +33,7 @@ public class TodoController {
   }
   
   @GetMapping("/{username}/todo")
-  Page<Todo> getTodoByUser(@PathVariable("username") String username,  Pageable page){
+  Page<Todo> getTodoByUser(@PathVariable("username") String username, @PageableDefault(sort = "id", direction = Direction.DESC) Pageable page){
       return service.getTodoOfUser(username, page).map(Todo::new);
   }
 
