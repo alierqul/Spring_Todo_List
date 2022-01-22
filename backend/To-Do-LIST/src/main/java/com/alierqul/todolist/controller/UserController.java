@@ -63,7 +63,7 @@ public class UserController {
 	public UserPojo updateUser(@RequestBody UserUpdate updateUser,@PathVariable("username") String username) {
 		UserEntity inDB=userService.getByUsername(username);
 		inDB.setName(updateUser.getName());
-		UserEntity user =userService.update(inDB);
+		UserEntity user =userService.update(inDB.getId(),inDB);
 		return new UserPojo(user);
 	}
 

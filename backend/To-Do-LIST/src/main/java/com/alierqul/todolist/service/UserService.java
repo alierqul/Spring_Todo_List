@@ -39,7 +39,7 @@ public class UserService implements IServiceCrudProgress <UserEntity> {
 	}
 
 	@Override
-	public UserEntity update(UserEntity entity) {
+	public UserEntity update(long id,UserEntity entity) {
 
 		return userRepository.save(entity);
 	}

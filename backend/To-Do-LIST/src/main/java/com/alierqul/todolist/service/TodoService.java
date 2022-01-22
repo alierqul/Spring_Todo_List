@@ -3,14 +3,22 @@ package com.alierqul.todolist.service;
 import com.alierqul.todolist.entity.TodoEntity;
 import com.alierqul.todolist.repository.ITodoRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.alierqul.todolist.pojo.Todo;
 import com.alierqul.todolist.repository.IUserRepository;
 import com.alierqul.todolist.entity.UserEntity;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class TodoService implements IServiceCrudProgress<TodoEntity> {
 
   private ITodoRepository todoRepository;
@@ -28,8 +36,19 @@ public class TodoService implements IServiceCrudProgress<TodoEntity> {
     return  todoRepository.save(entity);
   }
 
+  public TodoEntity create(TodoEntity entity,String username) {
+    UserEntity user=userService.findByUsername(username);
+    entity.setUser(user);
+    return  create(entity);
+  }
+
   @Override
-  public TodoEntity update(TodoEntity entity) {
+  public TodoEntity update(long id,TodoEntity entity) {
+    TodoEntity todo=getById(id);
+    todo.setId(entity.getId());
+    todo.setTodo(entity.getTodo());
+    todo.setStartDate(entity.getStartDate());
+    todo.setFinishDate(entity.getFinishDate());
     return todoRepository.save(entity);
   }
 
@@ -41,7 +60,11 @@ public class TodoService implements IServiceCrudProgress<TodoEntity> {
 
   @Override
   public TodoEntity getById(long id) {
-    return todoRepository.getById(id);
+    Optional<TodoEntity> optDB=todoRepository.findById(id);
+    if(!optDB.isPresent()){
+      throw new IllegalArgumentException("Not found id"+id);
+    }
+    return optDB.get();
   }
 
   @Override
@@ -49,17 +72,13 @@ public class TodoService implements IServiceCrudProgress<TodoEntity> {
     todoRepository.deleteById(id);
   }
 
-  public void save(Todo todo, String username) {
-    UserEntity user=userService.findByUsername(username);
-    TodoEntity entity = new TodoEntity();
-    entity.setTodo(todo.getTodo());
-    entity.setUser(user);
-      create(entity);
-
-  }
 
   public Page<TodoEntity> getTodoOfUser(String username, Pageable page) {
     UserEntity inDB = userService.findByUsername(username);
-    return todoRepository.findByUser(inDB, page);
+
+    List<TodoEntity> todos=inDB.getTodos().stream().collect(Collectors.toList());
+
+    Page<TodoEntity> pages = new PageImpl<>(todos, page, todos.size());
+    return pages;
   }
 }

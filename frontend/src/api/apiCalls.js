@@ -10,7 +10,8 @@ export const login = creds => {
  };
 
  export const getMyTodoList = (username,page=0,size=3)=> {
-  const path = username && `/api/1.0/todo/${username}?page=${page}&size=${size}`;
+  const path = username && `/api/1.0/${username}/todo?page=${page}&size=${size}`;
+  
   return axios.get(path);
  };
 

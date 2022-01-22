@@ -24,8 +24,8 @@ private static final Logger log = LoggerFactory.getLogger(UserAuthService.class)
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     UserEntity inDB= userRepository.findByUsername(username);
     if(inDB==null) {
-      log.warn("Email Not Found");
-      throw new UsernameNotFoundException("Email not found");
+      log.warn("User Not Found");
+      throw new UsernameNotFoundException("User not found");
     }
     return inDB;
   }

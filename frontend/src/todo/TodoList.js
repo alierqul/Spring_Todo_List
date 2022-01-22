@@ -1,6 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import { getMyTodoList } from '../api/apiCalls';
 import TodoSingleListItem from './TodoSingleListItem';
+import NewTodoSave from '../todo/NewTodoSave';
 
 
 const TodoList = props => {
@@ -10,6 +11,7 @@ const TodoList = props => {
         size:3,
         number:0
     });
+    const[todo,setTodo]=useState();
    
 
     useEffect( ()=>{
@@ -28,6 +30,15 @@ const TodoList = props => {
         }
        
     }   
+
+    const loadChangeTodoText=event=>{
+        const {value}=event.target;
+        setTodo(value);
+        console.log(todo);
+    }
+
+
+
     const {content:todos,last,first}=page;
     return (
         <div className='container m-5 p-2 rounded mx-auto bg-light shadow'>
@@ -39,7 +50,8 @@ const TodoList = props => {
             </div>
         </div>
     </div>
-   
+  
+   <NewTodoSave onChangeTodoText={loadChangeTodoText()}></NewTodoSave>
     
     <div className='card'>
                         

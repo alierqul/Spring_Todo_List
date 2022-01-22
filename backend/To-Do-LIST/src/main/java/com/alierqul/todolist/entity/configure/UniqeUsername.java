@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 @Constraint(validatedBy = {UniqeUsernameValidator.class})
 public @interface UniqeUsername {
-  String message() default "{hoaxify.constraint.email.UniqueUsername.message}";
+  String message() default "{todo.constraint.username.NotNull.message}";
 
   Class<?>[] groups() default {};
 

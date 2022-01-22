@@ -11,14 +11,18 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.alierqul.todolist.entity.configure.UniqeUsername;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Data;
 
-@Data
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class UserEntity implements UserDetails {
 
   private static final long serialVersionUID = 9066911572038657025L;
@@ -28,7 +32,7 @@ public class UserEntity implements UserDetails {
     private long id;
     
     @UniqeUsername
-    @NotNull(message="{todo.constraint.email.NotNull.message}")    
+    @NotNull(message="{todo.constraint.username.NotNull.message}")
     @Size(min = 4, max=255 )
     
     private String username;
@@ -47,7 +51,7 @@ public class UserEntity implements UserDetails {
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private Set<TodoEntity> todos = new HashSet<TodoEntity>();
-    private String image;
+  private String image;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
