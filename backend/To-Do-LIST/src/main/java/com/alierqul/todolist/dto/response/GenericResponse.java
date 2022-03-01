@@ -1,4 +1,4 @@
-package com.alierqul.todolist.shared;
+package com.alierqul.todolist.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

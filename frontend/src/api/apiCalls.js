@@ -35,6 +35,16 @@ export const setAuthorizationHeader = ({isLoggedIn, username, password }) => {
   return axios.post(path,body)
  };
 
+ export const deleteTodo = (username,body)=> {
+  const path = username && `/api/1.0/${username}/todo`;  
+  return axios.delete(path,{data:body})
+ };
+
+ export const doneTodo = (username,body)=> {
+  const path = username && `/api/1.0/${username}/todo`;  
+  return axios.put(path,body)
+ };
+
 export const changeLanguage = language => {
    axios.defaults.headers['accept-language'] = language;
  };

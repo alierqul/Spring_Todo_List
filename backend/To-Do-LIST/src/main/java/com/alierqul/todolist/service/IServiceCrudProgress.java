@@ -1,6 +1,5 @@
 package com.alierqul.todolist.service;
 
-import com.alierqul.todolist.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

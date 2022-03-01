@@ -3,9 +3,9 @@ package com.alierqul.todolist.controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alierqul.todolist.entity.configure.CurrentUser;
-import com.alierqul.todolist.entity.UserEntity;
-import com.alierqul.todolist.pojo.UserPojo;
+import com.alierqul.todolist.repository.entity.configure.CurrentUser;
+import com.alierqul.todolist.repository.entity.UserEntity;
+import com.alierqul.todolist.dto.request.UserPojo;
 
 @RestController
 public class AuthController {

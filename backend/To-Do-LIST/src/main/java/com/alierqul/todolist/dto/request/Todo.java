@@ -1,10 +1,9 @@
-package com.alierqul.todolist.pojo;
+package com.alierqul.todolist.dto.request;
 
 
 import java.util.Date;
 
-import com.alierqul.todolist.entity.TodoEntity;
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.TodoEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +17,8 @@ public class Todo {
  
   private long id;
   private String todo; 
-  private Date startDate;
-  private Date finishDate;
+  private long startDate;
+  private long finishDate;
   
   public Todo(TodoEntity todo) {
     

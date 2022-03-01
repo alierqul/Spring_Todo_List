@@ -1,4 +1,4 @@
-package com.alierqul.todolist.pojo;
+package com.alierqul.todolist.dto.request;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

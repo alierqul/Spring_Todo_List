@@ -1,4 +1,4 @@
-package com.alierqul.todolist.entity.configure;
+package com.alierqul.todolist.repository.entity.configure;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

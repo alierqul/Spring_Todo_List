@@ -1,4 +1,4 @@
-package com.alierqul.todolist.entity;
+package com.alierqul.todolist.repository.entity;
 
 
 import java.util.Collection;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.alierqul.todolist.entity.configure.UniqeUsername;
+import com.alierqul.todolist.repository.entity.configure.UniqeUsername;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

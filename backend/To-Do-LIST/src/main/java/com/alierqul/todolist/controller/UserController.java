@@ -2,8 +2,8 @@ package com.alierqul.todolist.controller;
 
 import javax.validation.Valid;
 
-import com.alierqul.todolist.entity.configure.CurrentUser;
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.configure.CurrentUser;
+import com.alierqul.todolist.repository.entity.UserEntity;
 import com.alierqul.todolist.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alierqul.todolist.shared.GenericResponse;
-import com.alierqul.todolist.pojo.UserPojo;
-import com.alierqul.todolist.pojo.UserUpdate;
+import com.alierqul.todolist.dto.response.GenericResponse;
+import com.alierqul.todolist.dto.request.UserPojo;
+import com.alierqul.todolist.dto.request.UserUpdate;
 
 @RestController
 @RequestMapping("/api/1.0")

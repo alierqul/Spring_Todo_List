@@ -1,10 +1,10 @@
-package com.alierqul.todolist.entity.configure;
+package com.alierqul.todolist.repository.entity.configure;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import com.alierqul.todolist.repository.IUserRepository;
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UniqeUsernameValidator implements ConstraintValidator<UniqeUsername, String> {

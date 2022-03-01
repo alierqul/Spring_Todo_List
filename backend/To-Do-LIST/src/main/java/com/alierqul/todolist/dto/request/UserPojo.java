@@ -1,6 +1,6 @@
-package com.alierqul.todolist.pojo;
+package com.alierqul.todolist.dto.request;
 
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.UserEntity;
 
 import lombok.Data;
 

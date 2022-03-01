@@ -1,7 +1,7 @@
 package com.alierqul.todolist.repository;
 
 
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.UserEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,24 +1,25 @@
 package com.alierqul.todolist.service;
 
-import com.alierqul.todolist.entity.TodoEntity;
+import com.alierqul.todolist.repository.entity.TodoEntity;
 import com.alierqul.todolist.repository.ITodoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.alierqul.todolist.pojo.Todo;
 import com.alierqul.todolist.repository.IUserRepository;
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.UserEntity;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Slf4j
 public class TodoService implements IServiceCrudProgress<TodoEntity> {
 
   private ITodoRepository todoRepository;
@@ -74,11 +75,18 @@ public class TodoService implements IServiceCrudProgress<TodoEntity> {
 
 
   public Page<TodoEntity> getTodoOfUser(String username, Pageable page) {
-    UserEntity inDB = userService.findByUsername(username);
+    UserEntity inDBUser = userService.findByUsername(username);
+    return todoRepository.findByUser(inDBUser,page);
+  }
 
-    List<TodoEntity> todos=inDB.getTodos().stream().collect(Collectors.toList());
+  public void doneTodo(long todoID) {
+    TodoEntity inDB=getById(todoID);
+    if(inDB.getFinishDate()<=0){
+      inDB.setFinishDate(System.currentTimeMillis());
+    }else{
+      inDB.setFinishDate(-1);
+    }
 
-    Page<TodoEntity> pages = new PageImpl<>(todos, page, todos.size());
-    return pages;
+    todoRepository.save(inDB);
   }
 }

@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.alierqul.todolist.repository.IUserRepository;
-import com.alierqul.todolist.entity.UserEntity;
+import com.alierqul.todolist.repository.entity.UserEntity;
 
 
 @Service
