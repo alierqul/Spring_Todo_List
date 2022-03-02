@@ -4,12 +4,13 @@ import TodoCard from './TodoCard';
 import NewTodoSave from './NewTodoSave';
 import {useSelector} from 'react-redux';
 import {deleteTodo,doneTodo} from '../../api/apiCalls';
-import { useParams } from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
+import { useApiProgress } from '../../shared/ApiProgress';
 
 const TodoList = props => {
-    const routePArams=useParams();
-    const pathUserName = routePArams.username;
-
+  
+    
+    const {t}=useTranslation();
     const [page,setPage]=useState({
         content:[],
         size:3,
@@ -17,7 +18,8 @@ const TodoList = props => {
     });
     const[todo,setTodo]=useState();
     const {loggedInUsername}=useSelector(store=>({loggedInUsername:store.username}));
-
+    const pendingApiCall = useApiProgress(`/api/1.0/${loggedInUsername}/todo`);
+    
     useEffect( ()=>{
         loadTodoList();
     },[]);
@@ -27,7 +29,7 @@ const TodoList = props => {
     const loadTodoList=async page =>{
        
         try{
-         const response=await getMyTodoList(pathUserName,page);
+         const response=await getMyTodoList(loggedInUsername,page);
          setPage(response.data);
         }catch(error){
            
@@ -41,7 +43,7 @@ const TodoList = props => {
             todoID:event.target.name
         };
        
-      await deleteTodo(pathUserName,body);
+      await deleteTodo(loggedInUsername,body);
       loadTodoList();
      
     };
@@ -52,7 +54,7 @@ const TodoList = props => {
             todoID:event.target.name
         };
        console.log("body = "+ body);
-      await doneTodo(pathUserName,body);
+      await doneTodo(loggedInUsername,body);
       loadTodoList();
      
     };
@@ -68,7 +70,7 @@ const TodoList = props => {
             todo,
             username:loggedInUsername                     
         };        
-        await saveTodo(pathUserName,body);
+        await saveTodo(loggedInUsername,body);
         loadTodoList();
     };
 
@@ -76,12 +78,12 @@ const TodoList = props => {
     const {content:todos}=page;
     return (
         <div className='container m-5 p-2 rounded mx-auto bg-light shadow'>
-            <NewTodoSave onChangeTodoText={loadChangeTodoText} onClickSaveTodo={onClickSaveTodo}  ></NewTodoSave>
+            <NewTodoSave onChangeTodoText={loadChangeTodoText} onClickSaveTodo={onClickSaveTodo} pendingApiCall={pendingApiCall} ></NewTodoSave>
         <div className='row m-1 p-4'>
         <div className='col'>
             <div className='p-1 h1 text-primary text-center mx-auto display-inline-block'>
                 <i className='fa fa-check bg-primary text-white rounded p-2'></i>
-                <u>My Todo-s</u>
+                <u>{t("My Todo-s")}</u>
             </div>
         </div>
     </div>
@@ -95,7 +97,9 @@ const TodoList = props => {
               todos.map((todo,index)=>(                  
                 <TodoCard key={todo.id} singleTodo={todo} 
                 onClickDoneButton={onClickDoneButton}
-                onClickDeleteButton={onClickDeleteButton}/>
+                onClickDeleteButton={onClickDeleteButton}
+                pendingApiCall={pendingApiCall}
+                />
               ))                                                                          
             } 
             </ul>

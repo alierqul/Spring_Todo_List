@@ -53,7 +53,7 @@ const TopBar = props => {
                         <img src={icon} width="32" height="32" className="d-inline-block align-top ms-4 me-4" alt="todo icon"/>                   
                         <div className="p-1 h6 text-primary  mx-auto display-inline-block">
                             < i className="fa fa-check bg-primary text-white rounded p-2"></i>
-                            <u>To-Do List</u>
+                            <u>{t('My Todo-s')}</u>
                             
                         </div>
                         </Link> 

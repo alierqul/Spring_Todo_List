@@ -22,7 +22,12 @@ i18n.use(initReactI18next).init({
         Edit: 'Edit',
         'Change Display Name': 'Change Display Name',
         Save: 'Save',
-        Cancel: 'Cancel'
+        Cancel: 'Cancel',
+        'My Todo-s':'My Todo-s',
+        Done:'Done',
+        Delete:'Delete',
+        Add:'Add',
+        'Add new todo ...':'Add new todo ...'
         
       }
     },
@@ -44,7 +49,12 @@ i18n.use(initReactI18next).init({
         Edit: 'Düzenle',
         'Change Display Name': 'Görünür İsminizi Değiştirin',
         Save: 'Kaydet',
-        Cancel: 'İptal Et'
+        Cancel: 'İptal Et',
+        'My Todo-s':' Yapılacaklar',
+        Done:'Tamamlandı',
+        Delete:'Sil',
+        Add:'Ekle',
+        'Add new todo ...':'Yeni Görev Ekle ...'
       }
     }
   },

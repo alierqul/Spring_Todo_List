@@ -1,10 +1,13 @@
 import * as React from 'react';
+import {formatDate} from '../../utils/Utils';
+import {useTranslation} from 'react-i18next';
+import ButtonWithProgress from '../ButtonWithProgress';
 
 const TodoCard = (props) => {
-    const {singleTodo,onClickDeleteButton, onClickDoneButton} =props;
+    const {singleTodo,onClickDeleteButton, onClickDoneButton, pendingApiCall} =props;
     const {id, todo, startDate, finishDate} =singleTodo;
-    const today =new Date(startDate);
-    const formatingDate =new Intl.DateTimeFormat('tr-TR', {year: 'numeric', month: 'long',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(today);
+   const {t}=useTranslation();
+  
   
     let textDecarion = "col-md-8";
     if(finishDate>0){
@@ -18,11 +21,12 @@ const TodoCard = (props) => {
              <div className='row'>    
                 <div className={textDecarion}>                                    
                     {todo}
-                    <p><small>{formatingDate}</small></p>               
+                    <p><small>{formatDate(startDate)} {finishDate>0 && ` / ${formatDate(finishDate)}` }</small></p>               
                 </div>
          <div className='col-md-4'>
-            <button className='btn btn-warning' name ={id} onClick={onClickDoneButton} >Yapıldı.</button>
-            <button className='btn btn-danger' name={id} onClick={onClickDeleteButton} >Sil</button>
+                   
+            <ButtonWithProgress className='btn btn-warning' name ={id} text= {t('Done')} onClick={onClickDoneButton} disabled={pendingApiCall} pendingApiCall={pendingApiCall}/>
+            <ButtonWithProgress className='btn btn-danger' name ={id} text= {t('Delete')} onClick={onClickDeleteButton} disabled={pendingApiCall} pendingApiCall={pendingApiCall}/>
          </div>        
          </div>  
         </label> 
